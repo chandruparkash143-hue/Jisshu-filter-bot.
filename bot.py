@@ -40,17 +40,20 @@ from Jisshu.bot import JisshuBot
 from Jisshu.util.keepalive import ping_server
 from Jisshu.bot.clients import initialize_clients
 
-ppath = "plugins/*.py"
-files = glob.glob(ppath)
-JisshuBot.start()
+path = "plugins/*.py"
+files = glob.glob(path)
+
 loop = asyncio.get_event_loop()
 
 
 async def Jisshu_start():
-    print('\n')
-    print('Initalizing The Movie Provider Bot')
+    print('Initializing the Movie Provider Bot')
+
+    await JisshuBot.start()
+
     bot_info = await JisshuBot.get_me()
     JisshuBot.username = bot_info.username
+
     await initialize_clients()
     for name in files:
         with open(name) as a:
